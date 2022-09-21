@@ -1,26 +1,78 @@
-import React from "react";
+import { array } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { ListGroupItem } from 'react-bootstrap';
+import  ListGroup  from 'react-bootstrap/ListGroup';
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
-const Home = () => {
+const Home = (props) => {
+
+	const [inputValue, setInputValue] = useState("");
+	const [tareas, setTareas] = useState([]);
+	const [oculto, setOculto] = useState({display: 'none'});
+
+	/*function agregarValue(valorInput){
+		const queHaceres = valorInput.target.value
+		setInputValue(queHaceres)
+	}*/
+
+	function handleAdd(){	
+		setTareas([inputValue,...tareas]) 
+		setInputValue("")
+	}
+
+	function handleDelete(index){	
+		let arregloSinEliminar = [...tareas]
+		arregloSinEliminar.splice(index, 1);
+		setTareas(arregloSinEliminar)
+	}
+
+	//onMouseEnter={()=>{tarea}} onMouseLeave={() =>{setOculto({display: 'none'})}}
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="todo-list">
+			<div className="lista container">	
+			<input type="text" placeholder='Nueva tarea' value={inputValue} onChange={valorInput => setInputValue(valorInput.target.value)} />					
+			{/* Para cuando no se usan parametros
+			no se debe usar funcion flecha */}
+			<button onClick={handleAdd}>Agregar</button>
+			
+			<h3 className={tareas.length == 0 ? "" : "d-none"}>No hay Tareas!</h3>
+				
+			<ListGroup> 
+			{
+				tareas.map((tarea,index)=>{
+					return(
+						<ListGroupItem className='tareabarra' key={index}>
+								{/* mouse enter una vez, mouse over es con el y sus hijos
+								mouse leave una vez, mouse out es el y sus hijos */}
+								<div className='todo d-flex justify-content-around'>
+									<div>{tarea}</div>
+									<div>
+									{/* Para cuando se usan parametros
+									se debe usar funcion flecha */}
+									<button className='boton' onClick={() => handleDelete(index)}>Eliminar</button>
+									</div>
+								</div>
+						</ListGroupItem>	
+					)
+				})			
+			}
+			</ListGroup>
+			</div>
 		</div>
 	);
 };
 
+/* {remaining === 0 ? (
+	<span className="product-sold-out">Sold Out</span>
+) : (
+	<span className="product-remaining">{remaining} remaining</span>
+)}
+</div> */
+
 export default Home;
+
+

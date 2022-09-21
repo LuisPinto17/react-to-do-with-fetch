@@ -10,3 +10,20 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body{
+    background-color: gray;
+}
+
+.lista{
+    background-color: white;
+    height: 450px;
+    width: 400px;
+}
+
+.boton{
+    display: none;
+}
+
+.tareabarra:hover .boton{
+    display: inline;
+}
