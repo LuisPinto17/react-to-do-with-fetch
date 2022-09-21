@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import  ListGroup  from 'react-bootstrap/ListGroup';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+//Este es mi ToDo´s con fetch
 
 //create your first component
 const Home = (props) => {
