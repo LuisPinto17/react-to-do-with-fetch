@@ -11,7 +11,7 @@ const Home = (props) => {
 
 	const [inputValue, setInputValue] = useState("");
 	const [tareas, setTareas] = useState([]);
-	const [oculto, setOculto] = useState({display: 'none'});
+	//const [oculto, setOculto] = useState({display: 'none'});
 
 	/*function agregarValue(valorInput){
 		const queHaceres = valorInput.target.value
