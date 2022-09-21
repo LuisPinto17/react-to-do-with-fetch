@@ -45,11 +45,7 @@ module.exports = {
     ]
   },
   resolve: {
-<<<<<<< HEAD
     extensions: ['*', '.js','.jsx']
-=======
-    extensions: ['*', '.js']
->>>>>>> aa069a22ff58a87a02593fe2126681880671764f
   },
   devtool: "source-map",
   devServer: {
