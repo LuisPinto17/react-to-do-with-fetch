@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 import { array } from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import  ListGroup  from 'react-bootstrap/ListGroup';
+=======
+import React from "react";
+>>>>>>> aa069a22ff58a87a02593fe2126681880671764f
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
+<<<<<<< HEAD
 const Home = (props) => {
 
 	const [inputValue, setInputValue] = useState("");
@@ -62,10 +67,28 @@ const Home = (props) => {
 			}
 			</ListGroup>
 			</div>
+=======
+const Home = () => {
+	return (
+		<div className="text-center">
+			<h1 className="text-center mt-5">Hello Rigo!</h1>
+			<p>
+				<img src={rigoImage} />
+			</p>
+			<a href="#" className="btn btn-success">
+				If you see this green button... bootstrap is working...
+			</a>
+			<p>
+				Made by{" "}
+				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
+				love!
+			</p>
+>>>>>>> aa069a22ff58a87a02593fe2126681880671764f
 		</div>
 	);
 };
 
+<<<<<<< HEAD
 /* {remaining === 0 ? (
 	<span className="product-sold-out">Sold Out</span>
 ) : (
@@ -76,3 +99,6 @@ const Home = (props) => {
 export default Home;
 
 
+=======
+export default Home;
+>>>>>>> aa069a22ff58a87a02593fe2126681880671764f
