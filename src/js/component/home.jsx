@@ -17,6 +17,22 @@ const Home = (props) => {
 		setInputValue(queHaceres)
 	}*/
 
+	useEffect(() => {
+		const getToDo = async () =>{
+			let response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/ehiber",{
+				headers:{
+					"Content-Type":"application/json"
+				},
+				method:"GET",
+			})
+			let data = await response.json()
+			setTasks(data)
+		
+	}
+	getToDo()
+	}, [])
+
+
 	function handleAdd(){	
 		setTareas([inputValue,...tareas]) 
 		setInputValue("")
