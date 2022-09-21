@@ -10,7 +10,6 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
-<<<<<<< HEAD
 body{
     background-color: gray;
 }
@@ -28,5 +27,3 @@ body{
 .tareabarra:hover .boton{
     display: inline;
 }
-=======
->>>>>>> aa069a22ff58a87a02593fe2126681880671764f
