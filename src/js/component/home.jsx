@@ -4,44 +4,86 @@ import { ListGroupItem } from 'react-bootstrap';
 import  ListGroup  from 'react-bootstrap/ListGroup';
 
 //Este es mi ToDo´s con fetch
-
+const URL_API = "https://assets.breatheco.de/apis/fake/todos/user/LuisP"
 //create your first component
 const Home = (props) => {
 
 	const [inputValue, setInputValue] = useState("");
 	const [tareas, setTareas] = useState([]);
-	//const [oculto, setOculto] = useState({display: 'none'});
 
-	/*function agregarValue(valorInput){
-		const queHaceres = valorInput.target.value
-		setInputValue(queHaceres)
-	}*/
+	const getToDo = async () =>{
+		let response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/LuisP",{
+			headers:{
+				"Content-Type":"application/json"
+			},
+			method:"GET",
+		})
+		let data = await response.json()
+		setTareas(data)
+	}
 
 	useEffect(() => {
-		const getToDo = async () =>{
-			let response = await fetch("https://assets.breatheco.de/apis/fake/todos/user/ehiber",{
-				headers:{
-					"Content-Type":"application/json"
-				},
-				method:"GET",
-			})
-			let data = await response.json()
-			setTasks(data)
-		
-	}
-	getToDo()
-	}, [])
+	
+		getToDo()
 
+	},[]);
+
+	const postToDo = async (newUser) =>{
+		let response = await fetch(`${URL_API}`,{
+			headers:{
+				"Content-Type":"application/json"
+			},
+			method:"POST",
+			body: JSON.stringify( []) 
+		})
+		let data = await response.json()
+		if (response.ok){
+			getToDo(newUser)
+		}
+	}	
+
+	const putToDo = async (newTasks) =>{
+		console.log(newTasks)
+		let response = await fetch(`${URL_API}`,{
+			headers:{
+				"Content-Type":"application/json"
+			},
+			method:"PUT",
+			body: JSON.stringify(newTasks) 
+		})
+		let data = await response.json()
+		if (response.ok){
+			console.log(data)
+			getToDo()
+		}
+	}
+
+	const handleDeleteUser= async ()=>{
+		let response = await fetch(`${URL_API}`,{
+			headers:{
+				"Content-Type":"application/json"
+			},
+			method:"PUT",
+			body: JSON.stringify(tareas)
+		})
+		let data = await response.json()
+		if (response.status == 200){
+			console.log("Eliminado con exito")
+		}
+	}
 
 	function handleAdd(){	
-		setTareas([inputValue,...tareas]) 
-		setInputValue("")
+		// setTareas([{label:inputValue,done:false},...tareas])
+		let newTask = [{label:inputValue,done:false},...tareas] 
+		putToDo(newTask)
+		setInputValue("") 
 	}
 
 	function handleDelete(index){	
 		let arregloSinEliminar = [...tareas]
 		arregloSinEliminar.splice(index, 1);
 		setTareas(arregloSinEliminar)
+		handleDeleteUser()
 	}
 
 	//onMouseEnter={()=>{tarea}} onMouseLeave={() =>{setOculto({display: 'none'})}}
@@ -49,13 +91,13 @@ const Home = (props) => {
 	return (
 		<div className="todo-list">
 			<div className="lista container">	
-			<input type="text" placeholder='Nueva tarea' value={inputValue} onChange={valorInput => setInputValue(valorInput.target.value)} />					
+			<input type="text" placeholder='Nueva tarea' value={inputValue} 
+			onChange={valorInput => setInputValue(valorInput.target.value)} />					
 			{/* Para cuando no se usan parametros
 			no se debe usar funcion flecha */}
 			<button onClick={handleAdd}>Agregar</button>
 			
-			<h3 className={tareas.length == 0 ? "" : "d-none"}>No hay Tareas!</h3>
-				
+			<h3 className={tareas.length == 0 ? "" : "d-none"}>No hay Tareas!</h3>					
 			<ListGroup> 
 			{
 				tareas.map((tarea,index)=>{
@@ -64,7 +106,7 @@ const Home = (props) => {
 								{/* mouse enter una vez, mouse over es con el y sus hijos
 								mouse leave una vez, mouse out es el y sus hijos */}
 								<div className='todo d-flex justify-content-around'>
-									<div>{tarea}</div>
+									<div>{tarea.label}</div>
 									<div>
 									{/* Para cuando se usan parametros
 									se debe usar funcion flecha */}
@@ -81,13 +123,5 @@ const Home = (props) => {
 	);
 };
 
-/* {remaining === 0 ? (
-	<span className="product-sold-out">Sold Out</span>
-) : (
-	<span className="product-remaining">{remaining} remaining</span>
-)}
-</div> */
-
 export default Home;
-
 
